@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing:border-box ;
+    box-sizing: border-box;
 }
 
 header,
@@ -14,22 +14,27 @@ form button {
 
 body, input, textarea {
     font-family: "Roboto", sans-serif;
+    padding-top: 80px; /* espaço para o header fixo */
 }
 
-header{
+header {
+    position: fixed; /* fixa o cabeçalho no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 16px 0;
-    background-color:#a3468f ;
+    background-color: #a3468f;
     color: #ecf0ec;
+    z-index: 1000; /* para ficar sempre acima */
 }
 
-
-header nav li{
+header nav li {
     display: inline;
     margin-left: 16px;
     font-size: 18px;
 }
 
-header nav li a{
+header nav li a {
     color: #ecf0ec;
     text-decoration: none;
 }
@@ -47,15 +52,115 @@ section .container {
     justify-content: space-between;
 }
 
-.brands-list img {
-    height: 150px;
+/* Sobre a loja: layout com carrossel + texto lado a lado */
+.about-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.section-subtitle-left {
+    font-family: "Bungee", cursive;
+    color: #a3468f;
+    margin: 24px 0 8px;
+    font-size: 20px;
+    text-align: left;
+}
+
+
+
+.carousel-loja {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 16px;
+}
+
+.carousel-image {
+    width: 100%;
+    display: none;
+    border-radius: 8px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-image.active {
+    display: block;
+    opacity: 1;
+}
+
+
+.carousel-buttons {
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.carousel-btn {
+    background-color: rgba(163, 70, 143, 0.5);
+    color: white;
+    border: none;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
     cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(131, 70, 118, 0.5);
+}
+
+
+/* Texto da about - metade da largura */
+.about-text {
+  width: 50%;
+  color: #a3468f;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Ajuste na lista de marcas para alinhamento e bordas */
+.brands-list {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
 }
 
 .brands-list li {
-    display: inline;
-    margin: auto;
+  flex: 1 1 100px;
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
+.brands-list li img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brands-list li img:hover {
+  transform: scale(1.05);
+}
+
+
 
 section .container {
     align-items: flex-start;
@@ -69,8 +174,8 @@ section h2 {
     margin-bottom: 8px;
 }
 
-section{
-    color:#a3468f  ;
+section {
+    color: #a3468f;
 }
 
 section p {
@@ -83,14 +188,13 @@ section img {
     cursor: pointer;
 }
 
-.social-links img{
+.social-links img {
     height: 40px;
 }
 
 .social-links li {
     display: inline;
 }
-
 
 .social-links li a {
     text-decoration: none;
@@ -105,9 +209,8 @@ section img {
 }
 
 .social-contact li a {
-    text-decoration:none ;
+    text-decoration: none;
 }
-
 
 #contact .container {
     display: block;
@@ -137,14 +240,14 @@ section h3 {
 }
 
 form button {
-    background-color: #a3468f ;
+    background-color: #a3468f;
     color: #ecf0ec;
     border: none;
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #834676 ;
+    background-color: #834676;
 }
 
 input:focus, textarea:focus {
@@ -152,7 +255,43 @@ input:focus, textarea:focus {
 }
 
 footer {
-    background-color: #a3468f ;
+    background-color: #a3468f;
     color: #ecf0ec;
     padding: 16px 0;
+}
+
+.modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    display: flex;
+    justify-content: center;  /* centraliza horizontalmente */
+    align-items: center;      /* centraliza verticalmente */
+    padding: 20px;            /* espaçamento nas bordas */
+}
+
+.modal-conteudo {
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 80vh;
+    display: block;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+
+.fechar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
 }

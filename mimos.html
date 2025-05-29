@@ -24,25 +24,41 @@
             </nav>
         </div>
     </header>
-    <section id="about">
-        <div class="container">
-            <img class="store-front" src="./midia/IMG-20240914-WA0017.jpg" alt="fachada da loja Mimos da Bru">
-            <div>
-                <h2>Sobre a loja</h2>
-                <p>
-                    Roupas personalizadas à venda oferecem uma maneira única e expressiva de se destacar, refletindo a individualidade e estilo pessoal de cada cliente. Ao optar por roupas personalizadas, você não apenas adquire um item de vestuário, mas também a chance de criar algo verdadeiramente exclusivo. Seja para eventos especiais, presentes ou simplesmente para um toque pessoal no dia a dia, essas peças são feitas sob medida para atender às suas preferências. Além disso, o processo de personalização pode incluir a escolha de tecidos, cores, estampas e até mesmo a adição de detalhes únicos, garantindo que cada peça seja uma verdadeira extensão da sua personalidade. Com a crescente demanda por autenticidade e originalidade, as roupas personalizadas estão se tornando uma tendência popular, combinando conforto e estilo com um toque pessoal inconfundível.
-                </p>
-                <ul  class="brands-list">
-                    <li> <img src="./midia/IMG-20240914-WA0018.jpg" alt="imagem"></li>
-                    <li> <img src="./midia/IMG-20240914-WA0019.jpg" alt="imagem"></li>
-                    <li> <img src="./midia/IMG-20240914-WA0020.jpg" alt="imagem"></li>
-                    <li> <img src="./midia/IMG-20240914-WA0021.jpg" alt="imagem"></li>
-                    <li> <img src="./midia/IMG-20240914-WA0022.jpg" alt="imagem"></li>
-                    <li> <img src="./midia/IMG-20240914-WA0023.jpg" alt="imagem"></li>
-                </ul>
-            </div>
+  <section id="about">
+  <div class="container about-content">
+    <div class="carousel-loja">
+      <img src="./midia/IMG-20240914-WA0017.jpg" class="carousel-image active" alt="Imagem da Loja 1">
+      <img src="./midia/IMG-20240914-WA0024.jpg" class="carousel-image" alt="Imagem da Loja 2">
+      <img src="./midia/IMG-20240914-WA0029.jpg" class="carousel-image" alt="Imagem da Loja 3">
+        <div class="carousel-buttons">
+            <button class="carousel-btn prev">&#10094;</button>
+            <button class="carousel-btn next">&#10095;</button>
         </div>
-    </section>
+    </div>
+    <div class="about-text">
+      <h2>Sobre a loja</h2>
+      <p>
+        Roupas personalizadas à venda oferecem uma maneira única e expressiva de se destacar, refletindo a individualidade e estilo pessoal de cada cliente. Ao optar por roupas personalizadas, você não apenas adquire um item de vestuário, mas também a chance de criar algo verdadeiramente exclusivo. Seja para eventos especiais, presentes ou simplesmente para um toque pessoal no dia a dia, essas peças são feitas sob medida para atender às suas preferências. Além disso, o processo de personalização pode incluir a escolha de tecidos, cores, estampas e até mesmo a adição de detalhes únicos, garantindo que cada peça seja uma verdadeira extensão da sua personalidade. Com a crescente demanda por autenticidade e originalidade, as roupas personalizadas estão se tornando uma tendência popular, combinando conforto e estilo com um toque pessoal inconfundível.
+      </p>
+      <h3 class="section-subtitle">Alguns dos nossos trabalhos</h3>
+      <ul class="brands-list">
+        <li><img src="./midia/IMG-20240914-WA0018.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0019.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0020.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0021.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0022.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0023.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0025.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0027.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0028.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0030.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0031.jpg" alt="imagem"></li>
+        <li><img src="./midia/IMG-20240914-WA0032.jpg" alt="imagem"></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
     <section id="contact">
         <div class="container">
             <h2>Contato</h2>
@@ -76,7 +92,7 @@
                     <h3>Nos chame pelo WhatsApp</h3>
                     <ul class="social-contact">
                         <li>
-                            <a href="5551985433830" title="Nos chame no WhatsApp">
+                            <a href="https://wa.me/5551985433830" title="Nos chame no WhatsApp" target="_blank" rel="noopener noreferrer">
                                 <img src="./midia/wattsap.webp" alt="Logo do WhatsApp">
                             </a>
                         </li>
@@ -93,5 +109,70 @@
             </p>
         </div>
     </footer>
+    <!-- Modal para ampliar a imagem -->
+<div id="imagemModal" class="modal" style="display:none;">
+  <span class="fechar" style="cursor:pointer;position:absolute;top:20px;right:30px;font-size:40px;color:#fff;font-weight:bold;">&times;</span>
+  <img class="modal-conteudo" id="imagemModalConteudo" style="display:block;margin:auto;max-width:90%;max-height:80vh;border-radius:8px;">
+</div>
+
+<script>
+  const modal = document.getElementById("imagemModal");
+  const modalImg = document.getElementById("imagemModalConteudo");
+  const fechar = modal.querySelector(".fechar");
+
+  // Abrir modal ao clicar em qualquer imagem da lista
+  document.querySelectorAll(".brands-list img").forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      modalImg.alt = img.alt || "";
+    });
+  });
+
+  // Fechar modal ao clicar no X
+  fechar.onclick = () => {
+    modal.style.display = "none";
+  };
+
+  // Fechar modal ao clicar fora da imagem
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Carrossel da loja
+const carouselLojaImages = document.querySelectorAll('.carousel-loja .carousel-image');
+const prevLojaBtn = document.querySelector('.carousel-loja .prev');
+const nextLojaBtn = document.querySelector('.carousel-loja .next');
+let currentLojaIndex = 0;
+
+function showLojaImage(index) {
+  carouselLojaImages.forEach((img, i) => {
+    img.classList.toggle('active', i === index);
+  });
+}
+
+prevLojaBtn.addEventListener('click', () => {
+  currentLojaIndex = (currentLojaIndex - 1 + carouselLojaImages.length) % carouselLojaImages.length;
+  showLojaImage(currentLojaIndex);
+});
+
+nextLojaBtn.addEventListener('click', () => {
+  currentLojaIndex = (currentLojaIndex + 1) % carouselLojaImages.length;
+  showLojaImage(currentLojaIndex);
+});
+
+// Auto-slide a cada 4 segundos
+setInterval(() => {
+  currentLojaIndex = (currentLojaIndex + 1) % carouselLojaImages.length;
+  showLojaImage(currentLojaIndex);
+}, 4000);
+
+// Inicializa o carrossel
+showLojaImage(currentLojaIndex);
+
+</script>
+
 </body>
 </html>
