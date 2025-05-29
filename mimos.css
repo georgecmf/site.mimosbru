@@ -295,3 +295,61 @@ footer {
     cursor: pointer;
     user-select: none;
 }
+
+/* Responsivo para telas menores que 768px (celular e tablet) */
+@media (max-width: 768px) {
+
+  header .container,
+  section .container,
+  .contact-methods,
+  .about-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-text {
+    width: 100%;
+  }
+
+  .carousel-loja {
+    max-width: 100%;
+  }
+
+  .brands-list {
+    justify-content: center;
+  }
+
+  .brands-list li {
+    max-width: 90px;
+  }
+
+  form input,
+  form textarea,
+  form button {
+    width: 100%;
+  }
+
+  .contact-methods > div {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .carousel-image {
+    height: auto;
+    max-height: 400px;
+  }
+
+  .carousel-buttons {
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+  }
+
+  section img {
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto 16px;
+  }
+}
+
