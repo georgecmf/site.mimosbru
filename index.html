@@ -2,6 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Roupas personalizadas e roupas de criança">
     <title>Mimos da Bru</title>
     <link rel="stylesheet" href="./mimos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -65,13 +67,19 @@
             <div class="contact-methods">
                 <div>
                     <h3>Fale conosco</h3>
-                    <form >
-                        <input type="text" placeholder="Seu nome" required/>
-                        <input type="email" placeholder="Seu email" required />
-                        <input type="tel" placeholder="Seu telefone" required />
-                        <textarea placeholder="Sua mensagem" required></textarea>
-                        <button type="submit">Enviar</button>
+                    <form action="https://formsubmit.co/gemarquesf@gmail.com" method="POST">
+                      <input type="hidden" name="_captcha" value="false">
+                      <input type="hidden" name="_next" value="https://site-mimosbru.vercel.app/obrigado.html">
+
+                      <input type="text" name="name" placeholder="Seu nome" required>
+                      <input type="email" name="email" placeholder="Seu e-mail" required>
+                      <input type="tel" name="phone" placeholder="Seu telefone" required>
+                      <textarea name="message" placeholder="Sua mensagem" required></textarea>
+
+                      <button type="submit">Enviar</button>
                     </form>
+
+
                 </div>
                 <div>
                     <h3>Nos acompanhe</h3>
