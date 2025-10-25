@@ -12,20 +12,25 @@ form button {
     font-weight: normal;
 }
 
-body, input, textarea {
+body,
+input,
+textarea {
     font-family: "Roboto", sans-serif;
-    padding-top: 80px; /* espaço para o header fixo */
+    padding-top: 80px;
+    /* espaço para o header fixo */
 }
 
 header {
-    position: fixed; /* fixa o cabeçalho no topo */
+    position: fixed;
+    /* fixa o cabeçalho no topo */
     top: 0;
     left: 0;
     width: 100%;
     padding: 16px 0;
     background-color: #a3468f;
     color: #ecf0ec;
-    z-index: 1000; /* para ficar sempre acima */
+    z-index: 1000;
+    /* para ficar sempre acima */
 }
 
 header nav li {
@@ -54,9 +59,9 @@ section .container {
 
 /* Sobre a loja: layout com carrossel + texto lado a lado */
 .about-content {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
 }
 
 .section-subtitle-left {
@@ -91,7 +96,7 @@ section .container {
 
 .carousel-buttons {
     position: absolute;
-    bottom: 20px; 
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -115,49 +120,49 @@ section .container {
 }
 
 .carousel-btn:hover {
-  background-color: rgba(131, 70, 118, 0.5);
+    background-color: rgba(131, 70, 118, 0.5);
 }
 
 
 /* Texto da about - metade da largura */
 .about-text {
-  width: 50%;
-  color: #a3468f;
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
+    width: 50%;
+    color: #a3468f;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 /* Ajuste na lista de marcas para alinhamento e bordas */
 .brands-list {
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  list-style: none;
-  padding: 0;
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
 }
 
 .brands-list li {
-  flex: 1 1 100px;
-  max-width: 100px;
-  display: flex;
-  justify-content: center;
-  border-radius: 8px;
-  overflow: hidden;
+    flex: 1 1 100px;
+    max-width: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .brands-list li img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .brands-list li img:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 
@@ -250,7 +255,8 @@ form button:hover {
     background-color: #834676;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline-color: #a3468f 1;
 }
 
@@ -271,18 +277,66 @@ footer {
     background-color: rgba(0, 0, 0, 0.8);
 
     display: flex;
-    justify-content: center;  /* centraliza horizontalmente */
-    align-items: center;      /* centraliza verticalmente */
-    padding: 20px;            /* espaçamento nas bordas */
+    justify-content: center;
+    /* centraliza horizontalmente */
+    align-items: center;
+    /* centraliza verticalmente */
+    padding: 40px;
+
+    .modal-prev,
+    .modal-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        font-size: 16px;
+        /* tamanho do ícone */
+        width: 30px;
+        /* largura do botão */
+        height: 30px;
+        /* altura do botão */
+        padding: 0;
+        /* remove padding extra */
+        border-radius: 4px;
+        /* cantos arredondados */
+        cursor: pointer;
+        user-select: none;
+        z-index: 10000;
+    }
+
+    .modal-prev {
+        left: 10px;
+    }
+
+    .modal-next {
+        right: 10px;
+    }
+
 }
+
+/* Responsivo para telas menores */
+@media (max-width: 768px) {
+
+    .modal-prev,
+    .modal-next {
+        font-size: 32px;
+        padding: 8px 12px;
+    }
+}
+
 
 .modal-conteudo {
     border-radius: 8px;
     max-width: 90%;
     max-height: 80vh;
     display: block;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    margin: auto;
+    /* centraliza na tela */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+
 
 
 .fechar {
@@ -299,57 +353,56 @@ footer {
 /* Responsivo para telas menores que 768px (celular e tablet) */
 @media (max-width: 768px) {
 
-  header .container,
-  section .container,
-  .contact-methods,
-  .about-content {
-    flex-direction: column;
-    text-align: center;
-  }
+    header .container,
+    section .container,
+    .contact-methods,
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
 
-  .about-text {
-    width: 100%;
-  }
+    .about-text {
+        width: 100%;
+    }
 
-  .carousel-loja {
-    max-width: 100%;
-  }
+    .carousel-loja {
+        max-width: 100%;
+    }
 
-  .brands-list {
-    justify-content: center;
-  }
+    .brands-list {
+        justify-content: center;
+    }
 
-  .brands-list li {
-    max-width: 90px;
-  }
+    .brands-list li {
+        max-width: 90px;
+    }
 
-  form input,
-  form textarea,
-  form button {
-    width: 100%;
-  }
+    form input,
+    form textarea,
+    form button {
+        width: 100%;
+    }
 
-  .contact-methods > div {
-    width: 100%;
-    margin-bottom: 24px;
-  }
+    .contact-methods>div {
+        width: 100%;
+        margin-bottom: 24px;
+    }
 
-  .carousel-image {
-    height: auto;
-    max-height: 400px;
-  }
+    .carousel-image {
+        height: auto;
+        max-height: 400px;
+    }
 
-  .carousel-buttons {
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-  }
+    .carousel-buttons {
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+    }
 
-  section img {
-    height: auto;
-    max-width: 100%;
-    margin: 0 auto 16px;
-  }
+    section img {
+        height: auto;
+        max-width: 100%;
+        margin: 0 auto 16px;
+    }
 }
-
