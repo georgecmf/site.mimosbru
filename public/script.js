@@ -1,134 +1,119 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const dbg = (...args) => { if (window.console) console.log('[mimos]', ...args); };
 
-    // --- MODAL GALERIA ---
+    /* ================= MODAL GALERIA ================= */
     const modal = document.getElementById('imagemModal');
-    const modalImg = document.getElementById('imagemModalConteudo');
-    const fechar = modal.querySelector('.fechar');
-    const btnPrev = modal.querySelector('.modal-prev');
-    const btnNext = modal.querySelector('.modal-next');
-    const images = Array.from(document.querySelectorAll('.brands-list img'));
-    let currentIndex = 0;
 
-    function showModal(index) {
-        currentIndex = index;
-        modal.style.display = 'flex';
-        modalImg.src = images[currentIndex].dataset.large || images[currentIndex].src;
-        modalImg.alt = images[currentIndex].alt || '';
-        document.body.style.overflow = 'hidden';
-    }
+    if (modal) {
+        const modalImg = document.getElementById('imagemModalConteudo');
+        const fechar = modal.querySelector('.fechar');
+        const btnPrev = modal.querySelector('.modal-prev');
+        const btnNext = modal.querySelector('.modal-next');
+        const images = Array.from(document.querySelectorAll('.brands-list img'));
+        let currentIndex = 0;
 
-    function closeModal() {
-        modal.style.display = 'none';
-        modalImg.src = '';
-        document.body.style.overflow = '';
-    }
-
-    function showNext() {
-        currentIndex = (currentIndex + 1) % images.length;
-        modalImg.src = images[currentIndex].dataset.large || images[currentIndex].src;
-    }
-
-    function showPrev() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        modalImg.src = images[currentIndex].dataset.large || images[currentIndex].src;
-    }
-
-    images.forEach((img, idx) => {
-        img.addEventListener('click', () => showModal(idx));
-    });
-
-    fechar.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
-    btnPrev.addEventListener('click', showPrev);
-    btnNext.addEventListener('click', showNext);
-
-    document.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'flex') {
-            if (e.key === 'ArrowRight') showNext();
-            if (e.key === 'ArrowLeft') showPrev();
-            if (e.key === 'Escape') closeModal();
+        function showModal(index) {
+            currentIndex = index;
+            modal.style.display = 'flex';
+            modalImg.src = images[currentIndex].src;
+            document.body.style.overflow = 'hidden';
         }
-    });
 
-    dbg('Modal galeria pronto');
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
 
-    // --- CARROSSEL LOJA ---
-    const carouselRoot = document.querySelector('.carousel-loja');
-    if (!carouselRoot) {
-        dbg('Carrossel não encontrado (.carousel-loja)');
-        return;
-    }
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            modalImg.src = images[currentIndex].src;
+        }
 
-    const carouselImages = carouselRoot.querySelectorAll('.carousel-image');
-    const prevBtn = carouselRoot.querySelector('.prev');
-    const nextBtn = carouselRoot.querySelector('.next');
-    if (!carouselImages.length) {
-        dbg('Nenhuma imagem encontrada no carrossel.');
-        return;
-    }
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+        }
 
-    let currentIndexCar = 0;
-    const total = carouselImages.length;
-    dbg('Carrossel inicializado. imagens:', total);
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => showModal(index));
+        });
 
-    function showImage(i) {
-        currentIndexCar = (i + total) % total;
-        carouselImages.forEach((img, idx) => {
-            img.classList.toggle('active', idx === currentIndexCar);
-            img.setAttribute('aria-hidden', idx !== currentIndexCar);
+        fechar.addEventListener('click', closeModal);
+        btnNext.addEventListener('click', showNext);
+        btnPrev.addEventListener('click', showPrev);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
     }
 
-    if (prevBtn) prevBtn.addEventListener('click', () => showImage(currentIndexCar - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => showImage(currentIndexCar + 1));
+    /* ================= CARROSSEL ================= */
+    const carousel = document.querySelector('.carousel-loja');
 
-    let autoplayTimer = null;
-    function startAutoplay() {
-        stopAutoplay();
-        autoplayTimer = setInterval(() => showImage(currentIndexCar + 1), 4000);
+    if (carousel) {
+        const images = carousel.querySelectorAll('.carousel-image');
+        const prev = carousel.querySelector('.prev');
+        const next = carousel.querySelector('.next');
+
+        let index = 0;
+
+        function showImage(i) {
+            images.forEach(img => img.classList.remove('active'));
+            index = (i + images.length) % images.length;
+            images[index].classList.add('active');
+        }
+
+        prev.addEventListener('click', () => showImage(index - 1));
+        next.addEventListener('click', () => showImage(index + 1));
+
+        setInterval(() => showImage(index + 1), 4000);
+
+        showImage(0);
     }
-    function stopAutoplay() {
-        if (autoplayTimer) clearInterval(autoplayTimer);
-    }
 
-    carouselRoot.addEventListener('mouseenter', stopAutoplay);
-    carouselRoot.addEventListener('mouseleave', startAutoplay);
-
-    showImage(currentIndexCar);
-    startAutoplay();
-
-    document.addEventListener('keydown', (e) => {
-        if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
-        if (e.key === 'ArrowLeft') showImage(currentIndexCar - 1);
-        if (e.key === 'ArrowRight') showImage(currentIndexCar + 1);
-    });
-
-    dbg('Carrossel pronto');
-
-    // --- FORMULÁRIO CONTATO ---
+    /* ================= FORMULÁRIO ================= */
     const form = document.getElementById('formContato');
+
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const data = new FormData(form);
+
             try {
                 const response = await fetch('https://formspree.io/f/xanjwbbl', {
                     method: 'POST',
-                    body: data,
+                    body: new FormData(form),
                     headers: { 'Accept': 'application/json' }
                 });
+
                 if (response.ok) {
                     window.location.href = '/obrigado.html';
                 } else {
-                    alert('Erro ao enviar. Tente novamente.');
+                    alert('Erro ao enviar formulário.');
                 }
-            } catch (err) {
+            } catch {
                 alert('Erro de conexão.');
             }
         });
     }
+
+    // ===== DARK MODE =====
+    const toggleTheme = document.getElementById('toggleTheme');
+
+    if (toggleTheme) {
+        // carrega preferência salva
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            toggleTheme.textContent = '☀️';
+        }
+
+        toggleTheme.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+
+            const isDark = document.body.classList.contains('dark');
+            toggleTheme.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
+
+
 });
